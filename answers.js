@@ -31,7 +31,16 @@ var fourteenEighteenPrices = items.filter(function(item){
     return item.price > 14 && item.price < 18;
 });
 
-console.log("A2: Items that cost between $14.00 USD and $18.00 USD: " + fourteenEighteenPrices);
+var printFourteenEighteenPrices = function(arr) {
+    console.log("A2: Items that cost between $14.00 USD and $18.00 USD: ");
+
+    return arr.forEach(function(item) {
+        console.log(item);
+    });
+};
+
+console.log(printFourteenEighteenPrices(fourteenEighteenPrices));
+
 
 
 
@@ -65,39 +74,61 @@ console.log("A3: " + GBPObj.title + " costs £" + GBPObj.price);
 
 
 
-//----------------------Question 4----COME BACK TO THIS---------------------//
+//----------------------Question 4------------------------//
 
 // Show me how to find which items are made of wood. Please console.log the ones you find.
 
-// Put all the materials into their own array
-// var materials = items.filter(function(item, index){
-//     var wood = "wood";
-//     return item[index].materials["wood"];
-// });
+var materials = items.map(function(item) {
+    return item.materials;
+});
+
+// example single array
+var stuff = ["wood", "metal", "plastic"];
+
+var colors = ["blue", "green", "pink"];
+
+var multipleStuff = [
+    ["wood", "metal", "plastic"],
+    ["metal", "plastic", "wood"],
+    ["pink", "blue", "yellow"]
+];
 
 
-// put materials in array, then filter down to just the arrays the contain "wood"
+// example filter on single array for item 
+var woodStuff = !!stuff.filter(function(item) {
+    return item === "wood"
+
+});
+
+// turn single array into function that takes an array and the item to be filtered, then use !! on the .length to make it say true or false instead of returning the actual item (an array or an empty array)
+var arrayContains = function(arr, thing) {
+    return !!arr.filter(function(item) {
+        return item === thing;
+    }).length;
+};
+
+// filter down the materials arrays to just those that contain wood
+var arrayOfArrays = materials.filter(function(singleArray) {
+   return arrayContains(singleArray, "wood");
+ 
+}); // good, but doesn't return the whole object that the wood material is in
 
 
 
+// convert the above into something that works on the objects in the items array
+var woodItems = items.filter(function(obj) {
+    return arrayContains(obj.materials, "wood");
+});
+
+var printWoodItems = woodItems.forEach(function(item) {
+    console.log("A4: " + item.title + " is made of wood");
+});
 
 
 
 //----------------------Question 5-------------------------//
 
 // Show me how to find which items are made of eight or more materials. Please console.log the ones you find.
-
-// Put all the materials into their own array
-// var materials = items.map(function(item){
-//     return item.materials;
-// });
-
-
-// // filter down to ones where the length is greater or equal to 8
-// var eightMaterials = materials.filter(function(item) {
-//     return item.length >= 8;
-// });
-
 
 var eightMaterials = items.filter(function(item, index) {
     return items[index].materials.length >= 8;
@@ -110,18 +141,6 @@ var printEights = eightMaterials.forEach(function(item) {
                 " materials: " + 
                 item.materials);
 });
-
-
-
-// items[0].materials
-
-// var filteringEights = function(arr) {
-//     arr.filter(function(item){
-//         return item.length >= 8;
-//     });
-// };
-
-// var eightMaterials = filteringEights(materials);
 
 
 
