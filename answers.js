@@ -20,6 +20,8 @@ console.log("A1: The average price is $" + average.toFixed(2));
 
 
 
+
+
 //----------------------Question 2-------------------------//
 
 //Show me how to get an array of items that cost between $14.00 and $18.00 USD
@@ -123,6 +125,7 @@ var woodItems = items.filter(function(obj) {
 var printWoodItems = woodItems.forEach(function(item) {
     console.log("A4: " + item.title + " is made of wood");
 });
+
 
 
 
